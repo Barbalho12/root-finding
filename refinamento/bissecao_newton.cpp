@@ -1,17 +1,20 @@
 #include <unistd.h>
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
 #include <string>
+#include <vector>
 #include <chrono>
 #include <math.h>
-#include "../model/function.cpp"
 
 using namespace std;
 typedef std::vector<float> vetor;
 
+double tempoPrint;
+
 int grau;
 float alto, baixo;
-double tempoPrint;
 vetor coeficiente(grau+1, 0);
 
 float f_(float n, vetor &derivada){
@@ -45,6 +48,11 @@ void verificacao(vetor &derivada){
 	
 }
 
+void showTime(double tempoTotal){
+	cout << "----------------------------"  << endl;
+	cout << "Tempo Algortimo: " << (tempoTotal-tempoPrint)*1000 << " ms"<< endl;
+	cout << "Tempo Total: " << (tempoTotal*1000) << " ms"<< endl;
+}
 
 void newton(){
 	srand(time(NULL));
@@ -62,6 +70,7 @@ void newton(){
 		xap = xnovo;		
 	}while(resposta>0);
 	
+	//Verifica tempo de impressão
 	auto t1 = std::chrono::high_resolution_clock::now();
 	
 	cout << "A aproximação desejada é "<<xap<<"\n";
@@ -71,31 +80,40 @@ void newton(){
 	tempoPrint += tempo.count();
 }
 
-
-
-void lerArgs(int argc, const char * argv[]){
-	// if(argc > 1){
-	// 	xxxxx = string(argv[1]);
-	// }if(argc > 2){
-	// 	xxxxx = string(argv[2]);
-	// }if(argc > 3){
-	// 	xxxxx = atoi(argv[3]);
-	// }
+void bissecao(){
+	float m, resposta;
+	float alto_baixo;
+	do{
+		alto_baixo = alto + baixo;
+		m = (alto_baixo/2);
+		if (f(m)*f(baixo)>0)
+		{
+			baixo = m;
+		}else{
+			if(f(m)== 0){
+			
+                auto t1 = std::chrono::high_resolution_clock::now();
+				
+				cout << "A raiz é "<<m<<"\n";
+				
+                auto t2 = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> tempo = t2 - t1;
+                tempoPrint += tempo.count();
+		    
+		    }
+			else{
+				alto = m;
+			    
+			}
+		}
+		resposta = alto - baixo;
+		if(resposta<0)
+			resposta = -1*resposta;
+	}while(resposta>2);
+	newton();
 }
 
-void showTime(double tempoTotal){
-	cout << "----------------------------"  << endl;
-	cout << "Tempo Algortimo: " << (tempoTotal-tempoPrint)*1000 << " ms"<< endl;
-	cout << "Tempo Total: " << (tempoTotal*1000) << " ms"<< endl;
-}
-
-
-int main(int argc, const char * argv[]){
-	
-	// auto t1 = std::chrono::high_resolution_clock::now();
-
-	lerArgs(argc, argv);
-	
+int main(){
 	cout << "Qual o grau do polinômio?\n";
 	cin >> grau;
 
@@ -130,13 +148,13 @@ int main(int argc, const char * argv[]){
 	cin >> baixo;
 	cout << "Limite Superior:\n";
 	cin >> alto;
-	
+    
     auto t1 = std::chrono::high_resolution_clock::now();
-
-	newton();
 	
-    auto t2 = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> tempo = t2 - t1;
+	bissecao();
+	
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo = t2 - t1;
 	double tempoTotal = tempo.count();
 	showTime(tempoTotal);
 	

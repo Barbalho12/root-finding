@@ -10,6 +10,14 @@
 
 using namespace std;
 
+double tempoPrint;
+
+void showTime(double tempoTotal){
+	cout << "----------------------------"  << endl;
+	cout << "Tempo Algortimo: " << (tempoTotal-tempoPrint)*1000 << " ms"<< endl;
+	cout << "Tempo Total: " << (tempoTotal*1000) << " ms"<< endl;
+}
+
 void lerArgs(int argc, const char * argv[], float &x_init, float &passo){
 	if(argc > 1){
 		x_init = atof(argv[1]);
@@ -17,7 +25,6 @@ void lerArgs(int argc, const char * argv[], float &x_init, float &passo){
 		passo = atof(argv[2]);
 	}
 }
-
 
 void troca_sinal(Function f, float x_init, float passo, float &baixo, float &alto){
 
@@ -50,16 +57,35 @@ int main(int argc, const char * argv[]){
 	
 	lerArgs(argc, argv, x, passo);
 	
-	
+	auto t1 = std::chrono::high_resolution_clock::now();
 	//Enquanto o sinal não muda
 	while(f.solve(x) * f.solve(x + passo) > 0){
+		
+		auto t2 = std::chrono::high_resolution_clock::now();
+		
 		cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
+		
+		auto t3 = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> tempo1 = t3 - t2;
+		tempoPrint += tempo1.count();
+		
 		x += passo;
 	}
 	
-	cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
+	auto t4 = std::chrono::high_resolution_clock::now();
 	
+	cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
 	cout << "\nA raiz está no intervalo [" << x << ", "<< x+passo << "]" << endl;
+	
+	auto t5 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo2 = t5 - t4;
+	tempoPrint += tempo2.count();
+	
+	
+	auto t6 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo3 = t6 - t1;
+	double tempoTotal = tempo3.count();
+	showTime(tempoTotal);
 	
 	return 0;
 }

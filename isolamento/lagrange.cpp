@@ -15,7 +15,15 @@ typedef std::vector<float> vetor;
 int grau;
 int k=-1;
 float b=0;
+double tempoPrint;
 vetor coeficiente(grau+1, 0);
+
+
+void showTime(double tempoTotal){
+	cout << "----------------------------"  << endl;
+	cout << "Tempo Algortimo: " << (tempoTotal-tempoPrint)*1000 << " ms"<< endl;
+	cout << "Tempo Total: " << (tempoTotal*1000) << " ms"<< endl;
+}
 
 float lx(){
 	for (int i = 0; i < grau; ++i)
@@ -135,7 +143,11 @@ void lagrange(){
 	float n_inferior = l_x();
 	float n_superior = l_1x();
 
+	auto t1 = std::chrono::high_resolution_clock::now();
 	cout << "Intervalo das raízes positivas: [" << p_inferior << ";" << p_superior << "]\nIntervalo das raízes Negativas: [" << n_inferior << ";" << n_superior << "]\n";
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo = t2 - t1;
+	tempoPrint += tempo.count();
 }
 
 
@@ -183,10 +195,16 @@ int main(){
 			cout << "+ "<<coeficiente[i]<<"X^"<<i<<" ";
 	}
 	cout << "\n";
+	
+	
+	auto t1 = std::chrono::high_resolution_clock::now();
 
 	lagrange();
 	
-	
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo = t2 - t1;
+	double tempoTotal = tempo.count();
+	showTime(tempoTotal);
 	
 	return 0;
 }

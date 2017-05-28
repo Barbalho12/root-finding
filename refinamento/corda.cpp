@@ -9,6 +9,7 @@
 using namespace std;
 typedef std::vector<float> vetor;
 
+double tempoPrint;
 int grau;
 float alto, baixo;
 vetor coeficiente(grau+1, 0);
@@ -35,8 +36,15 @@ void corda(){
 		{
 			baixo = cn;
 		}else{
-			if(f(cn)== 0.00)
+			if(f(cn)== 0.00){
+                auto t1 = std::chrono::high_resolution_clock::now();
+                
 				cout << "A raiz é "<<cn<<"\n";
+                
+                auto t2 = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> tempo = t2 - t1;
+                tempoPrint += tempo.count();
+			}
 			else
 				alto = cn;
 		}
@@ -44,32 +52,25 @@ void corda(){
 		if(resposta<0)
 			resposta = -1*resposta;
 	}while(resposta>0.001);
+	
+    auto t1 = std::chrono::high_resolution_clock::now();
+	
 	cout << "A aproximação desejada é "<<cn<<"\n";
+    
+    auto t2 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> tempo = t2 - t1;
+    tempoPrint += tempo.count();
 }
 
-// void lerArgs(int argc, const char * argv[]){
-// 	// if(argc > 1){
-// 	// 	xxxxx = string(argv[1]);
-// 	// }if(argc > 2){
-// 	// 	xxxxx = string(argv[2]);
-// 	// }if(argc > 3){
-// 	// 	xxxxx = atoi(argv[3]);
-// 	// }
-// }
 
-
+void showTime(double tempoTotal){
+	cout << "----------------------------"  << endl;
+	cout << "Tempo Algortimo: " << (tempoTotal-tempoPrint)*1000 << " ms"<< endl;
+	cout << "Tempo Total: " << (tempoTotal*1000) << " ms"<< endl;
+}
 
 int main(int argc, const char * argv[]){
-	
-	// auto t1 = std::chrono::high_resolution_clock::now();
 
-	// lerArgs(argc, argv);
-
-	
-	// auto t2 = std::chrono::high_resolution_clock::now();
-	// std::chrono::duration<double> tempo = t2 - t1;
-	// double tempoTotal = tempo.count();
-	
 	cout << "Qual o grau do polinômio?\n";
 	cin >> grau;
 
@@ -105,9 +106,14 @@ int main(int argc, const char * argv[]){
 	cout << "Limite Superior:\n";
 	cin >> alto;
 
+	auto t1 = std::chrono::high_resolution_clock::now();
+	
 	corda();
 	
-	
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo = t2 - t1;
+	double tempoTotal = tempo.count();
+	showTime(tempoTotal);
 	
 	return 0;
 
