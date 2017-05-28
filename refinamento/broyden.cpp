@@ -4,6 +4,7 @@
 #include <string>
 #include <chrono>
 #include <math.h>
+#include "../model/function.cpp"
 
 using namespace std;
 

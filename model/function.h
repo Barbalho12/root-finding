@@ -16,14 +16,15 @@ class Function{
 	
 	private:
 		string name;
-		vector<double> coeficientes;
+		vector<float> coeficientes;
 	
 	public:
-		Function(string name, vector<double> coeficientes);
-		Function(vector<double> coeficientes);
+		Function(string name, vector<float> coeficientes);
+		Function(vector<float> coeficientes);
 		~Function();
-		double solve(double);
+		float solve(float);
 		void show();
+		vector<float> getCoeficientes();
 	
 };
 

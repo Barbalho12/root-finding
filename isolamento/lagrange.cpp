@@ -7,6 +7,7 @@
 #include <vector>
 #include <chrono>
 #include <math.h>
+#include "../model/function.cpp"
 
 using namespace std;
 typedef std::vector<float> vetor;
@@ -134,7 +135,22 @@ void lagrange(){
 	float n_inferior = l_x();
 	float n_superior = l_1x();
 
-	cout << "Intervalo das raízes positivas: [" << p_inferior << ";" << p_superior << "]\nIntervalo das raízes Negativas:[" << n_inferior << ";" << n_superior << "]\n";
+	cout << "Intervalo das raízes positivas: [" << p_inferior << ";" << p_superior << "]\nIntervalo das raízes Negativas: [" << n_inferior << ";" << n_superior << "]\n";
+}
+
+
+void lagrange(Function f, bool positivo, float &baixo, float &alto){
+	
+	coeficiente = f.getCoeficientes();
+	
+	if(positivo){
+		baixo = l1x();
+		alto = lx();
+	}else{
+		baixo = l_x();
+		alto = l_1x();
+	}
+	
 }
 
 int main(){

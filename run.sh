@@ -1,20 +1,45 @@
-# MA="matrizA.txt"
-# VB="vetorB.txt"
-# N=3
-# N=$2
+#!/bin/bash
 
-
-# if [ "$1" = 'l' ]; then
-#   ./bin/fatoracao_lu.exe fatoracao_lu/$MA fatoracao_lu/$VB $N $N
-# elif [ "$1" = 'c'  ]; then
-#   ./bin/cholesky.exe cholesky/$MA cholesky/$VB $N $N
-# elif [ "$1" = 'j'  ]; then
-#   ./bin/jacobi.exe jacobi/$MA jacobi/$VB $N $N
-# elif [ "$1" = 'g'  ]; then
-#   ./bin/gauss_seidel.exe gauss_seidel/$MA gauss_seidel/$VB $N $N
-# else
-#     echo " l = Fatoração LU"
-#     echo " c = Cholesky"
-#     echo " j = Jacobi"
-#     echo " g = Gauss Seidel"
-# fi
+if [ "$1" = 'la' ]; then
+    echo "     Refinamento -> Lagrange     "
+    echo " ------------------------------- "
+  ./bin/lagrange.exe
+elif [ "$1" = 'tr'  ]; then
+    echo "  Refinamento -> Troca de Sinal  "
+    echo " ------------------------------- "
+  ./bin/troca_sinal.exe
+elif [ "$1" = 'bi'  ]; then
+    echo "     Refinamento -> Bisseção     "
+    echo " ------------------------------- "
+  ./bin/bissecao.exe
+elif [ "$1" = 'br'  ]; then
+    echo "       Refinamento -> Corda      "
+    echo " ------------------------------- "
+  ./bin/broyden.exe
+elif [ "$1" = 'co'  ]; then
+    echo "    Refinamento -> Ponto Fixo    "
+    echo " ------------------------------- "
+  ./bin/corda.exe
+elif [ "$1" = 'ne'  ]; then
+    echo "      Refinamento -> Newton      "
+    echo " ------------------------------- "
+  ./bin/newton.exe
+elif [ "$1" = 'po'  ]; then
+    echo "      Refinamento -> Broyden     "
+    echo " ------------------------------- "
+  ./bin/ponto_fixo.exe
+else
+   
+    echo " --- Isolamento --- "
+    echo " la = Lagrange"
+    echo " tr = Troca de Sinal"
+    echo " ------------------- "
+    
+    echo " --- Refinamento --- "
+    echo " bi = Bisseção"
+    echo " co = Corda"
+    echo " po = Ponto Fixo"
+    echo " ne = Newton"
+    echo " br = Broyden"
+    echo " ------------------- "
+fi
