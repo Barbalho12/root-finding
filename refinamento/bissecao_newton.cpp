@@ -107,9 +107,7 @@ void bissecao(){
 			}
 		}
 		resposta = alto - baixo;
-		if(resposta<0)
-			resposta = -1*resposta;
-	}while(resposta>2);
+	}while(fabs(resposta) >2);
 	newton();
 }
 
