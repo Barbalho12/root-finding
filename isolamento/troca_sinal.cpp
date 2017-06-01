@@ -21,10 +21,30 @@ void showTime(double tempoTotal){
 
 void lerArgs(int argc, const char * argv[], float &x_init, float &passo){
 	if(argc > 1){
-		x_init = atof(argv[1]);
+		x_init = atof(argv[2]);
 	}if(argc > 2){
-		passo = atof(argv[2]);
+		passo = atof(argv[3]);
 	}
+}
+
+Function lerFunction(int argc, const char * argv[]){
+	Function f;
+	
+	if(argc <= 4){
+		f.readFromUser();
+
+	}else{
+		vector<float> coeficientes(argc-4, 0);
+	
+		for(int i = 0; i < argc-4; i++){
+			coeficientes[i] = atof(argv[argc-i-1]);
+		}
+		// cout << argv[0] << endl;
+		f.setCoeficientes(coeficientes);
+		f.show();
+	}
+
+	return f;
 }
 
 int troca_sinal(Function f, float x_init, float passo, float &baixo, float &alto){
@@ -50,8 +70,8 @@ int troca_sinal(Function f, float x_init, float passo, float &baixo, float &alto
 
 int main(int argc, const char * argv[]){
 
-	Function f;
-	f.readFromUser();
+	Function f = lerFunction(argc, argv);
+	// f.readFromUser();
 
 	float x_init = 0; 
 	float passo = 0.1; 

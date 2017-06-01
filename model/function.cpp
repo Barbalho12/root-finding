@@ -1,3 +1,4 @@
+
 #include "function.h"
 
 
@@ -18,6 +19,18 @@ Function::Function(string name, vector<float> coeficientes){
 
 Function::~Function(){
 	// this->coeficientes.clear();
+}
+
+
+
+Function Function::calculateDerivada(){
+	vector<float> derivada(getGrau()+1, 0);
+	for (int i = getGrau(); i > 0; --i){
+		derivada[i-1]= i*this->coeficientes[i];
+	}
+	Function f_(derivada);
+	
+	return f_;
 }
 
 float Function::solve(float x){
@@ -57,12 +70,18 @@ void Function::show(){
 
 
 		if(i == grau || this->coeficientes[i] < 0){
+			if(this->coeficientes[i] < 0 && i != grau ){
+				cout << "- ";
+			}else if(this->coeficientes[i] < 0 && i == grau){
+				cout << "-"; 
+			}
+			
 			if(i == 0){
-				cout << "- " << coeficiente.str() << " ";
+				cout  << coeficiente.str() << " ";
 			}else if(i == 1){
-				cout << "- " << coeficiente.str() << "x" << " ";
+				cout << coeficiente.str() << "x" << " ";
 			}else{
-				cout << "- "<< coeficiente.str() << "x^" << i <<"  ";
+				cout << coeficiente.str() << "x^" << i <<"  ";
 			}
 			
 		}else{
@@ -80,6 +99,10 @@ void Function::show(){
 
 vector<float> Function::getCoeficientes(){
 	return this->coeficientes;
+}
+
+void Function::setCoeficientes(vector<float> coeficientes){
+	this->coeficientes = coeficientes;
 }
 
 void Function::readFromUser(){

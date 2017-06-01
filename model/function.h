@@ -29,9 +29,12 @@ class Function{
 		float solve(float);
 		void show();
 		vector<float> getCoeficientes();
+		void setCoeficientes(vector<float> coeficientes);
 		int getGrau();
+		Function calculateDerivada();
 		
 	
 };
+
 
 #endif

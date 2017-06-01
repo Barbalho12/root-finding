@@ -7,80 +7,70 @@
 #include "../model/function.cpp"
 
 using namespace std;
-typedef std::vector<float> vetor;
+// typedef std::vector<float> vetor;
 
-int grau;
-float alto, baixo;
 double tempoPrint;
-vetor coeficiente(grau+1, 0);
+int qtdPassos = 0;
 
-float f_(float n, vetor &derivada){
-	float aux=0;
-	for (int i = 0; i < grau; ++i)
-	{
-		aux = aux + derivada[i]*pow(n,i);
-	}
 
-	return aux;
-}
-
-float f(float n){
-	float aux=0;
-	for (int i = 0; i < grau+1; ++i)
-	{
-		aux = aux + coeficiente[i]*pow(n,i);
-	}
-
-	return aux;
-}
-
-void verificacao(vetor &derivada){
-	int n;
-	for (int i = grau; i > 0; --i)
-	{
-		n = i-1;
-		derivada[n]= i*coeficiente[i];
-		
-	}
+float newton(Function f, float baixo, float alto, float limite){
 	
-}
+	float xap = baixo + alto * ((float)(rand())/RAND_MAX);
+	cout << "x inicial aleatório no intervalo: " << xap << endl;
+	cout << "----------------------------"  << endl;
+	
+	Function f_ = f.calculateDerivada();
 
-
-void newton(){
-	srand(time(NULL));
-	float xap=baixo + alto*((float)(rand())/RAND_MAX);
-	vetor derivada(grau, 0);
-	verificacao(derivada);
-	float xnovo, resposta;
+	float xnovo;
+	
 	do{
-		xnovo = xap - (f(xap)/f_(xap, derivada));
-		cout << xap<<"\n";
-		resposta = xnovo-xap;
-		if(resposta<0)
-			resposta = -1*resposta;
+		qtdPassos++;
+		
+		xnovo = xap - (f.solve(xap)/f_.solve(xap));
 
-		xap = xnovo;		
-	}while(resposta>0);
-	
-	auto t1 = std::chrono::high_resolution_clock::now();
-	
-	cout << "A aproximação desejada é "<<xap<<"\n";
-	
-	auto t2 = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> tempo = t2 - t1;
-	tempoPrint += tempo.count();
+		xap = xnovo;
+		
+		auto t1 = std::chrono::high_resolution_clock::now();
+		cout << "Iteração " << qtdPassos << ": " << f.solve(xap) << endl;
+		auto t2 = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> tempo = t2 - t1;
+		tempoPrint += tempo.count();
+		
+	}while( fabs(f.solve(xap)) > limite );
+
+	return xap;
 }
 
 
 
-void lerArgs(int argc, const char * argv[]){
-	// if(argc > 1){
-	// 	xxxxx = string(argv[1]);
-	// }if(argc > 2){
-	// 	xxxxx = string(argv[2]);
-	// }if(argc > 3){
-	// 	xxxxx = atoi(argv[3]);
-	// }
+void lerArgs(int argc, const char * argv[], float &baixo, float &alto, float &limite){
+	if(argc > 1){
+		baixo = atof(argv[2]);
+	}if(argc > 2){
+		alto = atof(argv[3]);
+	}if(argc > 3){
+		limite = atof(argv[4]);
+	}
+}
+
+Function lerFunction(int argc, const char * argv[]){
+	Function f;
+	
+	if(argc <= 5){
+		f.readFromUser();
+
+	}else{
+		vector<float> coeficientes(argc-5, 0);
+	
+		for(int i = 0; i < argc-5; i++){
+			coeficientes[i] = atof(argv[argc-i-1]);
+		}
+
+		f.setCoeficientes(coeficientes);
+		f.show();
+	}
+
+	return f;
 }
 
 void showTime(double tempoTotal){
@@ -92,50 +82,32 @@ void showTime(double tempoTotal){
 
 int main(int argc, const char * argv[]){
 	
-	// auto t1 = std::chrono::high_resolution_clock::now();
-
-	lerArgs(argc, argv);
+	srand(time(NULL));
 	
-	cout << "Qual o grau do polinômio?\n";
-	cin >> grau;
-
-
-	for (int i = grau; i >= 0; --i)
-	{
-		cout << "Qual o coeficiente de X^"<<i<<"?\n";
-		cin >> coeficiente[i];
-		if(i==grau && coeficiente[i]<=0){
-			cout << "a_n deve ser maior que zero, por favor informe um outro número\n";
-			cin >> coeficiente[i];
-		}
-		if (i ==0 && coeficiente[i]==0)
-		{
-			cout << "a_0 não pode ser zero, por favor informe um outro número\n";
-			cin >> coeficiente[i];
-		}
-	}
-
-	/*imprime na tela*/
-	cout << "Sua função: ";
-	for (int i = grau; i >= 0; --i)
-	{
-		if(i==grau ||coeficiente[i]<0)
-			cout << coeficiente[i]<<"X^"<<i<<" ";
-		else
-			cout << "+ "<<coeficiente[i]<<"X^"<<i<<" ";
-	}
-	cout << "\n";
-
-	cout << "Limite inferior:\n";
-	cin >> baixo;
-	cout << "Limite Superior:\n";
-	cin >> alto;
+	Function f = lerFunction(argc, argv);
 	
-    auto t1 = std::chrono::high_resolution_clock::now();
-
-	newton();
+	float alto =  2;
+	float baixo = 0.5;
+	float limite = 0.01;
+	
+	lerArgs(argc, argv, baixo, alto, limite);
+	
+	cout << "Baixo: " << baixo << endl;
+	cout << "Alto: " << alto << endl;
+	cout << "Precisão: " << limite << endl;
+	cout << "----------------------------"  << endl;
+	
+	auto t1 = std::chrono::high_resolution_clock::now();
+	
+	float raiz = newton(f, baixo, alto, limite);
 	
     auto t2 = std::chrono::high_resolution_clock::now();
+    
+    
+    
+    cout <<  "A raiz é " << raiz << endl;
+	cout <<  "Numero de passos: " << qtdPassos << endl;
+    
     std::chrono::duration<double> tempo = t2 - t1;
 	double tempoTotal = tempo.count();
 	showTime(tempoTotal);

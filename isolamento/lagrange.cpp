@@ -161,10 +161,29 @@ void lagrange(Function f, bool positivo, float &baixo, float &alto){
 	
 }
 
-int main(){
-
+Function lerFunction(int argc, const char * argv[]){
 	Function f;
-	f.readFromUser();
+	
+	if(argc <= 2){
+		f.readFromUser();
+
+	}else{
+		vector<float> coeficientes(argc-2, 0);
+	
+		for(int i = 0; i < argc-2; i++){
+			coeficientes[i] = atof(argv[argc-i-1]);
+		}
+		f.setCoeficientes(coeficientes);
+		f.show();
+	}
+
+	return f;
+}
+
+int main(int argc, const char * argv[]){
+
+	Function f = lerFunction(argc, argv);
+	// f.readFromUser();
 
 	float p_superior;
 	float p_inferior;

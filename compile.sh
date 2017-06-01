@@ -12,16 +12,19 @@ elif [ "$1" = 'tr'  ]; then
 elif [ "$1" = 'bi'  ]; then
     echo  "Compilando Bisseção..."
     g++ -std=c++11  refinamento/bissecao.cpp -o bin/bissecao.exe
-elif [ "$1" = 'br'  ]; then
+elif [ "$1" = 'co'  ]; then
     echo  "Compilando Corda..."
     g++ -std=c++11  refinamento/corda.cpp -o bin/corda.exe
-elif [ "$1" = 'co'  ]; then
+elif [ "$1" = 'po'  ]; then
     echo  "Compilando Ponto Fixo..."
     g++ -std=c++11  refinamento/ponto_fixo.cpp -o bin/ponto_fixo.exe
 elif [ "$1" = 'ne'  ]; then
     echo  "Compilando Newton  ..."
     g++ -std=c++11  refinamento/newton.cpp -o bin/newton.exe
-elif [ "$1" = 'po'  ]; then
+elif [ "$1" = 'bn'  ]; then
+    echo  "Compilando Bisseção-Newton  ..."
+    g++ -std=c++11  refinamento/bissecao_newton.cpp -o bin/bissecao_newton.exe    
+elif [ "$1" = 'br'  ]; then
     echo  "Compilando Broyden ..."
     g++ -std=c++11  refinamento/broyden.cpp -o bin/broyden.exe
 else
@@ -43,6 +46,9 @@ else
 
     echo  "Compilando Newton..."
     g++ -std=c++11  refinamento/newton.cpp -o bin/newton.exe
+    
+    echo  "Compilando Bisseção-Newton  ..."
+    g++ -std=c++11  refinamento/bissecao_newton.cpp -o bin/bissecao_newton.exe
 
     echo  "Compilando Broyden..."
     g++ -std=c++11  refinamento/broyden.cpp -o bin/broyden.exe
