@@ -13,6 +13,7 @@ int grau;
 float alto, baixo;
 double tempoPrint;
 vetor coeficiente(grau+1, 0);
+int qtdPassos = 0;
 
 float g_(float n, vetor &derivada){
 	float aux=0;
@@ -40,8 +41,12 @@ void ponto_fixo(){
 	
 	float xnovo, resposta;
 	do{
+		qtdPassos++;
+		
 		xnovo = g(xap);
-		cout << xap<<"\n";
+		
+		cout << "Iteração " << qtdPassos << ": " << xap << endl;
+		
 		resposta = xnovo-xap;
 		if(resposta<0)
 			resposta = -1*resposta;

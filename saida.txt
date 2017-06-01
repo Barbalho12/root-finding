@@ -1,18 +1,15 @@
 
-Compilando Lagrange...
-
 
 Isolamento -> Lagrange     
 ------------------------------- 
 f(x) = x^2  - 4x + 3 
 ----------------------------
-Tempo Algortimo: 0.019263 ms
-Tempo Total: 0.019263 ms
+Tempo Algortimo: 0.012925 ms
+Tempo Total: 0.012925 ms
 Intervalo das raízes positivas: [0.428571;5]
 Intervalo das raízes Negativas: [3;-0.428571]
 ------------------------------------------------
 
-Compilando TrocaSinal...
 
 
 Isolamento -> Troca de Sinal  
@@ -29,26 +26,36 @@ f(x) = x^2  - 4x + 3
 0.8 = 0.44 ------ 0.9 = 0.21
 0.9 = 0.21 ------ 1 = -2.38419e-07
 ----------------------------
-Tempo Algortimo: 0.025133 ms
-Tempo Total: 0.154396 ms
+Tempo Algortimo: 0.013984 ms
+Tempo Total: 0.044482 ms
 Intervalo das raízes: [0.9;1]
 Numero de passos: 9
 ------------------------------------------------
 
-Compilando Bisseção...
 
 
 Refinamento -> Bisseção     
 ------------------------------- 
 f(x) = x^2  - 4x + 3 
+1 Iteração: 0 ~ 5
+2 Iteração: 0 ~ 2.5
+3 Iteração: 0 ~ 1.25
+4 Iteração: 0.625 ~ 1.25
+5 Iteração: 0.9375 ~ 1.25
+6 Iteração: 0.9375 ~ 1.09375
+7 Iteração: 0.9375 ~ 1.01562
+8 Iteração: 0.976562 ~ 1.01562
+9 Iteração: 0.996094 ~ 1.01562
+10 Iteração: 0.996094 ~ 1.00586
+11 Iteração: 0.996094 ~ 1.00098
+12 Iteração: 0.998535 ~ 1.00098
 A raiz é 0.999756
 Numero de passos: 12
 ----------------------------
-Tempo Algortimo: 0.035364 ms
-Tempo Total: 0.035364 ms
+Tempo Algortimo: 0.027933 ms
+Tempo Total: 0.097314 ms
 ------------------------------------------------
 
-Compilando Corda...
 
 
 Refinamento -> Corda        
@@ -71,11 +78,9 @@ Iteração 14: 0.000732556
 A raiz é 3.00037
 Numero de passos: 14
 ----------------------------
-Tempo Algortimo: 0.110688 ms
-Tempo Total: 0.110688 ms
+Tempo Algortimo: 0.213544 ms
+Tempo Total: 0.213544 ms
 ------------------------------------------------
-
-Compilando Newton  ...
 
 
 Refinamento -> Newton      
@@ -85,20 +90,17 @@ Baixo: 0
 Alto: 5
 Precisão: 0.001
 ----------------------------
-x inicial aleatório no intervalo: 4.75791
+x inicial aleatório no intervalo: 1.30511
 ----------------------------
-Iteração 1: 1.43439
-Iteração 2: 0.211292
-Iteração 3: 0.00921407
-Iteração 4: 2.09809e-05
-A raiz é 3.00001
-Numero de passos: 4
+Iteração 1: 0.138455
+Iteração 2: 0.00420965
+Iteração 3: 4.41075e-06
+A raiz é 0.999998
+Numero de passos: 3
 ----------------------------
-Tempo Algortimo: 0.026988 ms
-Tempo Total: 0.04562 ms
+Tempo Algortimo: 0.02795 ms
+Tempo Total: 0.061246 ms
 ------------------------------------------------
-
-Compilando Bisseção-Newton  ...
 
 
 Refinamento -> Bisseção Newton      
@@ -118,11 +120,9 @@ A raiz é 3.0003
 Numero de passos Bisseçaõ: 1
 Numero de passos Newton: 3
 ----------------------------
-Tempo Algortimo: -0.010777 ms
-Tempo Total: 0.059505 ms
+Tempo Algortimo: 0.0114 ms
+Tempo Total: 0.039024 ms
 ------------------------------------------------
-
-Compilando Ponto Fixo...
 
 
 Refinamento -> Ponto Fixo  
@@ -140,33 +140,34 @@ Limite inferior:
 0
 Limite Superior:
 1.9
-0.755588
-0.892728
-0.949241
-0.975265
-0.987785
-0.99393
-0.996974
-0.998489
-0.999245
-0.999623
-0.999811
-0.999906
-0.999953
-0.999976
-0.999988
-0.999994
-0.999997
-0.999999
-0.999999
-1
-1
-1
-1
+Iteração 1: 0.533255
+Iteração 2: 0.82109
+Iteração 3: 0.918547
+Iteração 4: 0.960932
+Iteração 5: 0.980848
+Iteração 6: 0.990516
+Iteração 7: 0.99528
+Iteração 8: 0.997646
+Iteração 9: 0.998824
+Iteração 10: 0.999412
+Iteração 11: 0.999706
+Iteração 12: 0.999853
+Iteração 13: 0.999927
+Iteração 14: 0.999963
+Iteração 15: 0.999982
+Iteração 16: 0.999991
+Iteração 17: 0.999995
+Iteração 18: 0.999998
+Iteração 19: 0.999999
+Iteração 20: 0.999999
+Iteração 21: 1
+Iteração 22: 1
+Iteração 23: 1
+Iteração 24: 1
 A aproximação desejada é 1
 ----------------------------
-Tempo Algortimo: 0.095206 ms
-Tempo Total: 0.098766 ms
+Tempo Algortimo: 0.135738 ms
+Tempo Total: 0.139618 ms
 ------------------------------------------------
 
 Compilando Broyden ...

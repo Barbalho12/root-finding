@@ -89,6 +89,12 @@ float bissecao(Function f, float baixo, float alto, float limite){
 		qtdPassos++;
 		
 		m = (alto + baixo)/2;
+		
+		auto t1 = std::chrono::high_resolution_clock::now();
+		cout << qtdPassos<< " Iteração: " << baixo << " ~ " << alto << endl;
+		auto t2 = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> tempo2 = t2 - t1;
+		tempoPrint += tempo2.count();
 	
 		if(f.solve(baixo) * f.solve(m) > 0){
 			baixo = m;
