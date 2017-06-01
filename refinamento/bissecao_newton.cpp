@@ -153,7 +153,7 @@ int main(int argc, const char * argv[]){
     
     
     cout <<  "A raiz é " << raiz2 << endl;
-    cout <<  "Numero de passos Bisseçaõ: " << qtdPassos_bi << endl;
+    cout <<  "Numero de passos Bisseção: " << qtdPassos_bi << endl;
 	cout <<  "Numero de passos Newton: " << qtdPassos_ne << endl;
     
     std::chrono::duration<double> tempo = t2 - t1;
