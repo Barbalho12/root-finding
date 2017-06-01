@@ -1,0 +1,192 @@
+
+Compilando Lagrange...
+
+
+Isolamento -> Lagrange     
+------------------------------- 
+f(x) = x^2  - 4x + 3 
+----------------------------
+Tempo Algortimo: 0.019263 ms
+Tempo Total: 0.019263 ms
+Intervalo das raízes positivas: [0.428571;5]
+Intervalo das raízes Negativas: [3;-0.428571]
+------------------------------------------------
+
+Compilando TrocaSinal...
+
+
+Isolamento -> Troca de Sinal  
+------------------------------- 
+f(x) = x^2  - 4x + 3 
+0 = 3 ------ 0.1 = 2.61
+0.1 = 2.61 ------ 0.2 = 2.24
+0.2 = 2.24 ------ 0.3 = 1.89
+0.3 = 1.89 ------ 0.4 = 1.56
+0.4 = 1.56 ------ 0.5 = 1.25
+0.5 = 1.25 ------ 0.6 = 0.96
+0.6 = 0.96 ------ 0.7 = 0.69
+0.7 = 0.69 ------ 0.8 = 0.44
+0.8 = 0.44 ------ 0.9 = 0.21
+0.9 = 0.21 ------ 1 = -2.38419e-07
+----------------------------
+Tempo Algortimo: 0.025133 ms
+Tempo Total: 0.154396 ms
+Intervalo das raízes: [0.9;1]
+Numero de passos: 9
+------------------------------------------------
+
+Compilando Bisseção...
+
+
+Refinamento -> Bisseção     
+------------------------------- 
+f(x) = x^2  - 4x + 3 
+A raiz é 0.999756
+Numero de passos: 12
+----------------------------
+Tempo Algortimo: 0.035364 ms
+Tempo Total: 0.035364 ms
+------------------------------------------------
+
+Compilando Corda...
+
+
+Refinamento -> Corda        
+------------------------------- 
+f(x) = x^2  - 4x + 3 
+Iteração 1: 24
+Iteração 2: 48
+Iteração 3: 3.84
+Iteração 4: 1.13609
+Iteração 5: 0.456599
+Iteração 6: 0.206396
+Iteração 7: 0.0983037
+Iteração 8: 0.0479929
+Iteração 9: 0.0237143
+Iteração 10: 0.0117876
+Iteração 11: 0.00587657
+Iteração 12: 0.00293374
+Iteração 13: 0.00146586
+Iteração 14: 0.000732556
+A raiz é 3.00037
+Numero de passos: 14
+----------------------------
+Tempo Algortimo: 0.110688 ms
+Tempo Total: 0.110688 ms
+------------------------------------------------
+
+Compilando Newton  ...
+
+
+Refinamento -> Newton      
+------------------------------- 
+f(x) = x^2  - 4x + 3 
+Baixo: 0
+Alto: 5
+Precisão: 0.001
+----------------------------
+x inicial aleatório no intervalo: 4.75791
+----------------------------
+Iteração 1: 1.43439
+Iteração 2: 0.211292
+Iteração 3: 0.00921407
+Iteração 4: 2.09809e-05
+A raiz é 3.00001
+Numero de passos: 4
+----------------------------
+Tempo Algortimo: 0.026988 ms
+Tempo Total: 0.04562 ms
+------------------------------------------------
+
+Compilando Bisseção-Newton  ...
+
+
+Refinamento -> Bisseção Newton      
+------------------------------- 
+f(x) = x^2  - 4x + 3 
+Baixo: 0
+Alto: 5
+Precisão: 0.001
+----------------------------
+1 Iteração: 0 ~ 5
+x inicial da bisseção: 2.5
+----------------------------
+Iteração 1: 0.5625
+Iteração 2: 0.0506252
+Iteração 3: 0.000609968
+A raiz é 3.0003
+Numero de passos Bisseçaõ: 1
+Numero de passos Newton: 3
+----------------------------
+Tempo Algortimo: -0.010777 ms
+Tempo Total: 0.059505 ms
+------------------------------------------------
+
+Compilando Ponto Fixo...
+
+
+Refinamento -> Ponto Fixo  
+------------------------------- 
+Qual o grau do polinômio?
+2
+Qual o coeficiente de X^2?
+0.25
+Qual o coeficiente de X^1?
+0
+Qual o coeficiente de X^0?
+0.75
+Sua função: 0.25X^2 + 0X^1 + 0.75X^0 
+Limite inferior:
+0
+Limite Superior:
+1.9
+0.755588
+0.892728
+0.949241
+0.975265
+0.987785
+0.99393
+0.996974
+0.998489
+0.999245
+0.999623
+0.999811
+0.999906
+0.999953
+0.999976
+0.999988
+0.999994
+0.999997
+0.999999
+0.999999
+1
+1
+1
+1
+A aproximação desejada é 1
+----------------------------
+Tempo Algortimo: 0.095206 ms
+Tempo Total: 0.098766 ms
+------------------------------------------------
+
+Compilando Broyden ...
+
+
+Refinamento -> Broyden      
+------------------------------- 
+x_ap inicial: (0, 0)^t
+erro: 0.001
+
+x_novo: (1, 1)^t
+delta_f: (2, 2)^t
+delta_x: (1, 1)^t
+u: (-3.5645e-15, -3.5645e-15)^t
+b_ap: |1, -3.5645e-15|
+      |-3.5645e-15, 1|
+b_ap_inv: |1, -1.27057e-29|
+          |-1.27057e-29, 1|
+
+ O vetor resposta é: (1, 1)^t
+----------------------------
+Tempo Algortimo: 0.039845 ms
+Tempo Total: 0.102682 ms

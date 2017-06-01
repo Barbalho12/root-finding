@@ -10,11 +10,11 @@ echo "------------------------------------------------"
 
 #Bisseção -- baixo alto precisão fucntion
 echo "------------------------------------------------"
-./run.sh bi 0 2 0.001 1 -4 3
+./run.sh bi 0 5 0.001 1 -4 3
 
 #Corda -- baixo alto precisão fucntion
 echo "------------------------------------------------"
-./run.sh co 0 2 0.001 1 -4 3
+./run.sh co 0 5 0.001 1 -4 3
 
 #Newton -- baixo alto precisão fucntion
 echo "------------------------------------------------"
