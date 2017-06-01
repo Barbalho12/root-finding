@@ -8,6 +8,8 @@
 #include <chrono>
 #include <math.h>
 #include <vector>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -19,12 +21,16 @@ class Function{
 		vector<float> coeficientes;
 	
 	public:
-		Function(string name, vector<float> coeficientes);
+		Function();
 		Function(vector<float> coeficientes);
+		Function(string name, vector<float> coeficientes);
 		~Function();
+		void readFromUser();
 		float solve(float);
 		void show();
 		vector<float> getCoeficientes();
+		int getGrau();
+		
 	
 };
 

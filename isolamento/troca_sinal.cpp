@@ -12,6 +12,7 @@ using namespace std;
 
 double tempoPrint;
 
+
 void showTime(double tempoTotal){
 	cout << "----------------------------"  << endl;
 	cout << "Tempo Algortimo: " << (tempoTotal-tempoPrint)*1000 << " ms"<< endl;
@@ -26,66 +27,55 @@ void lerArgs(int argc, const char * argv[], float &x_init, float &passo){
 	}
 }
 
-void troca_sinal(Function f, float x_init, float passo, float &baixo, float &alto){
+int troca_sinal(Function f, float x_init, float passo, float &baixo, float &alto){
+
+	int qtd_passos = 0;
 
 	float x = x_init;
 	
 	while(f.solve(x) * f.solve(x + passo) > 0){
+		qtd_passos++;
+
 		cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
 		x += passo;
 	}
-	
+	cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
+
 	baixo = x;
 	alto = x + passo;
+
+	return qtd_passos;
 }
 
 
 int main(int argc, const char * argv[]){
 
-	vector<float> c(3);
-	c[0] = 1;
-	c[1] = 0;
-	c[2] = -2;
-	Function f(c);
-	
-	cout << "\nA função recebida:  ";
-	f.show();
-	cout << endl;
-	
-	float x;
-	float passo;
-	
-	lerArgs(argc, argv, x, passo);
-	
+	Function f;
+	f.readFromUser();
+
+	float x_init = 0; 
+	float passo = 0.1; 
+	float baixo;
+	float alto;
+
+	lerArgs(argc, argv, x_init, passo);
+
+
 	auto t1 = std::chrono::high_resolution_clock::now();
-	//Enquanto o sinal não muda
-	while(f.solve(x) * f.solve(x + passo) > 0){
-		
-		auto t2 = std::chrono::high_resolution_clock::now();
-		
-		cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
-		
-		auto t3 = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> tempo1 = t3 - t2;
-		tempoPrint += tempo1.count();
-		
-		x += passo;
-	}
+
+	int qtd_passos = troca_sinal(f, x_init, passo, baixo, alto);
 	
-	auto t4 = std::chrono::high_resolution_clock::now();
-	
-	cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
-	cout << "\nA raiz está no intervalo [" << x << ", "<< x+passo << "]" << endl;
-	
-	auto t5 = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> tempo2 = t5 - t4;
-	tempoPrint += tempo2.count();
-	
-	
-	auto t6 = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> tempo3 = t6 - t1;
-	double tempoTotal = tempo3.count();
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo = t2 - t1;
+	double tempoTotal = tempo.count();
 	showTime(tempoTotal);
-	
+
+
+
+	cout << "Intervalo das raízes: [" << baixo << ";" << alto << "]" << endl; 
+	cout << "Numero de passos: " << qtd_passos << endl; 
+
+
+
 	return 0;
 }

@@ -1,33 +1,55 @@
 #!/bin/bash
 
+
 if [ "$1" = 'la' ]; then
-    echo "     Refinamento -> Lagrange     "
+    ./compile.sh la
+     echo  ""
+    echo "     Isolamento -> Lagrange     "
     echo " ------------------------------- "
-  ./bin/lagrange.exe
+
+    ./bin/lagrange.exe
 elif [ "$1" = 'tr'  ]; then
-    echo "  Refinamento -> Troca de Sinal  "
+  ./compile.sh tr
+     echo  ""
+    echo "  Isolamento -> Troca de Sinal  "
     echo " ------------------------------- "
-  ./bin/troca_sinal.exe
+    
+    ./bin/troca_sinal.exe
 elif [ "$1" = 'bi'  ]; then
+      ./compile.sh bi
+     echo  ""
     echo "     Refinamento -> Bisseção     "
     echo " ------------------------------- "
-  ./bin/bissecao.exe
+
+    ./bin/bissecao.exe
 elif [ "$1" = 'br'  ]; then
+    ./compile.sh co
+     echo  ""
     echo "       Refinamento -> Corda      "
     echo " ------------------------------- "
-  ./bin/broyden.exe
+
+    ./bin/broyden.exe
 elif [ "$1" = 'co'  ]; then
+    ./compile.sh po
+     echo  ""
     echo "    Refinamento -> Ponto Fixo    "
     echo " ------------------------------- "
-  ./bin/corda.exe
+
+    ./bin/corda.exe
 elif [ "$1" = 'ne'  ]; then
+    ./compile.sh ne
+     echo  ""
     echo "      Refinamento -> Newton      "
     echo " ------------------------------- "
-  ./bin/newton.exe
+
+    ./bin/newton.exe
 elif [ "$1" = 'po'  ]; then
+      ./compile.sh br
+     echo  ""
     echo "      Refinamento -> Broyden     "
     echo " ------------------------------- "
-  ./bin/ponto_fixo.exe
+
+    ./bin/ponto_fixo.exe
 else
    
     echo " --- Isolamento --- "

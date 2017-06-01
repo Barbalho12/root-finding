@@ -1,84 +1,115 @@
 #include "function.h"
 
 
+Function::Function(){
+	this->name = "f";
+}
+
+Function::Function(vector<float> coeficientes){
+	this->name = "f";
+	this->coeficientes = coeficientes;
+}
+
 Function::Function(string name, vector<float> coeficientes){
 	this->name = name;
 	this->coeficientes = coeficientes;
 }
 
-Function::Function(vector<float> coeficientes){
-	this->coeficientes = coeficientes;
-}
 
 Function::~Function(){
-	// coeficientes.clear();
+	// this->coeficientes.clear();
 }
 
 float Function::solve(float x){
-	//start the power of the function
-	int power = this->coeficientes.size()-1;
 	
 	//creates the result variable
 	float result = 0;
 	
 	//runs throught the coefficients
 	for(int i = 0; i < this->coeficientes.size(); i++){
-		float coeff = coeficientes[i];
+		float coeff = float (this->coeficientes[i]);
 		
 		//put the multiplication inside the result
-		result += coeff * pow(x, power);
-		
-		power--;
+		result += coeff * pow(x, i);
+
 	}
 	
 	return result;
 }
 
 void Function::show(){
-	int pot = this->coeficientes.size()-1;
-	bool anterior = false;
-	for(int i = 0; i < this->coeficientes.size(); i++){
-		float x = coeficientes[i];
-		
-		if(i > 0){
-			if(x != 0){
-				if(anterior){
-	
-					if(x > 0){
-						cout << " + ";	
-					}else if(x < 0){
-						cout << " - ";	
-					}
-					if(x != 1 && x != -1){
-						cout << fabs(x);
-					}
-					
-				}else{
-					cout << x;	
-				}
-			}
+	int grau = this->coeficientes.size()-1;
+
+	cout << this->name << "(x) = ";
+	for (int i = grau; i >= 0; --i){
+
+		stringstream coeficiente;
+
+		if(this->coeficientes[i] == 1 && i > 0){
+			coeficiente << "";
 		}else{
-			if(x > 1 || x < -1){
-				cout << x;	
-			}else if(x == -1){
-				cout << "-";
-			}
+			coeficiente << fabs(this->coeficientes[i]);
 		}
-		if(x != 0){
-			if(pot > 0){
-				cout << "x";
-				anterior = true;
+
+		if(this->coeficientes[i] == 0){
+			continue;
+		}
+
+
+		if(i == grau || this->coeficientes[i] < 0){
+			if(i == 0){
+				cout << "- " << coeficiente.str() << " ";
+			}else if(i == 1){
+				cout << "- " << coeficiente.str() << "x" << " ";
+			}else{
+				cout << "- "<< coeficiente.str() << "x^" << i <<"  ";
 			}
 			
-			if(pot > 1){
-				cout << "^" << pot;
+		}else{
+			if(i == 0){
+				cout << "+ " << coeficiente.str() << " ";
+			}else if(i == 1){
+				cout << "+ " << coeficiente.str() << "x" << " ";
+			}else{
+				cout << "+ " << coeficiente.str() << "x^" << i << " ";
 			}
 		}
-		pot--;
 	}
-	cout << " = " << 0 << endl;
+	cout << endl;
 }
 
 vector<float> Function::getCoeficientes(){
 	return this->coeficientes;
+}
+
+void Function::readFromUser(){
+	int grau;
+
+	cout << "Qual o grau do polinômio?" << endl;
+	cin >> grau;
+	
+	this->coeficientes = vector<float>(grau+1, 0);
+
+	for (int i = grau; i >= 0; --i){
+		
+		cout << "Qual o coeficiente de x^" << i << "?" << endl;
+		cin >> this->coeficientes[i];
+
+		if(i == grau && this->coeficientes[i] <= 0){
+
+			cout << "a_n deve ser maior que zero, por favor informe um outro número\n";
+			cin >> this->coeficientes[i]; 
+		}
+		if (i == 0 && this->coeficientes[i] == 0){
+
+			cout << "a_0 não pode ser zero, por favor informe um outro número\n";
+			cin >> this->coeficientes[i];
+		}
+	}
+
+	show();
+}
+
+int Function::getGrau(){
+	return this->coeficientes.size()-1;
 }
