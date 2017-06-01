@@ -21,8 +21,14 @@ float bissecao(Function f, float baixo, float alto, float limite){
 		qtdPassos_bi++;
 		
 		m = (alto + baixo)/2;
+		
+			auto t1 = std::chrono::high_resolution_clock::now();
+			cout << qtdPassos_bi<< " Iteração: " << baixo << " ~ " << alto << endl;
+			auto t2 = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> tempo2 = t2 - t1;
+			tempoPrint += tempo2.count();
 	
-		cout << qtdPassos_bi<< " Iteração: " << baixo << " ~ " << alto << endl;
+		
 			
 		if(f.solve(baixo) * f.solve(m) > 0){
 			baixo = m;
@@ -42,8 +48,14 @@ float bissecao(Function f, float baixo, float alto, float limite){
 float newton(Function f, float limite, float xap){
 	
 	// float xap = baixo + alto * ((float)(rand())/RAND_MAX);
+
+	auto t1 = std::chrono::high_resolution_clock::now();
 	cout << "x inicial da bisseção: " << xap << endl;
 	cout << "----------------------------"  << endl;
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo2 = t2 - t1;
+	tempoPrint += tempo2.count();
+		
 	
 	Function f_ = f.calculateDerivada();
 
@@ -118,19 +130,25 @@ int main(int argc, const char * argv[]){
 	
 	lerArgs(argc, argv, baixo, alto, limite);
 	
+	//calcula o tempo dos prits
+	auto t1 = std::chrono::high_resolution_clock::now();
 	cout << "Baixo: " << baixo << endl;
 	cout << "Alto: " << alto << endl;
 	cout << "Precisão: " << limite << endl;
 	cout << "----------------------------"  << endl;
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo1 = t2 - t1;
+	tempoPrint += tempo1.count();
+
 	
-	auto t1 = std::chrono::high_resolution_clock::now();
+	t1 = std::chrono::high_resolution_clock::now();
 	
 	float raiz1 = bissecao(f, baixo, alto, 1);
 	
 	float raiz2 = newton(f, limite, raiz1);
 	
 		
-    auto t2 = std::chrono::high_resolution_clock::now();
+    t2 = std::chrono::high_resolution_clock::now();
     
     
     

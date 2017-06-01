@@ -56,10 +56,23 @@ int troca_sinal(Function f, float x_init, float passo, float &baixo, float &alto
 	while(f.solve(x) * f.solve(x + passo) > 0){
 		qtd_passos++;
 
+		//calcula o tempo dos prits
+		auto t1 = std::chrono::high_resolution_clock::now();
 		cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
+		
+		auto t2 = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> tempo = t2 - t1;
+		tempoPrint += tempo.count();
+		
 		x += passo;
 	}
+	
+	//calcula o tempo dos prits
+	auto t1 = std::chrono::high_resolution_clock::now();
 	cout << x <<  " = " << f.solve(x) << " ------ " << passo + x << " = " << f.solve(passo+ x) << endl;
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> tempo = t2 - t1;
+	tempoPrint += tempo.count();
 
 	baixo = x;
 	alto = x + passo;

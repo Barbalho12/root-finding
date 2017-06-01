@@ -24,19 +24,14 @@ echo "------------------------------------------------"
 echo "------------------------------------------------"
 ./run.sh bn 0 5 0.001 1 -4 3
 
-# #Ponto Fixo -- baixo alto precisão fucntion
+#Ponto Fixo -- 
+echo "------------------------------------------------"
+#função g(x) =0.25x²+0.75
+#intervalo: 0 ~ 1,9
+./run.sh po 
 
-# ./run.sh po 0 2 0.001 $ARGS
-
-# #Broyden -- baixo alto precisão fucntion
-
-# ./run.sh po 0 2 0.001 $ARGS
+#Broyden -- 
+echo "------------------------------------------------"
+./run.sh br
 
 
-# 1 -4 3
-
-# coloca pra mesma função
-# x²-4x+3
-# no intervalo 0.43 ate 5
-# mas no ponto fixo coloca a função g(x) =0.25x²+0.75
-# no intervalo 0 ~ 1,9
